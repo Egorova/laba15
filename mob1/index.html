@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <link rel="stylesheet" href="/css/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<h1>Работа с Интернетом</h1>
+<div class="task1">
+    <h3>Задание 1</h3>
+    <button class="btn1" onclick="window.open('https://google.ru', '_blank')">Google.ru</button>
+    <button class="btn1" onclick="window.open('https://yandex.ru', '_blank')">Yandex.ru</button>
+    <button class="btn1" onclick="window.open('https://developer.android.com', '_blank')">developer.android.com</button>
+</div>
+<div class="task2">
+    <h3 class="wh">Задание 2</h3>
+    <p><strong>Результат:</strong> <span id="jsonOutput">Ожидание действия...</span></p>
+    <button class="btn1" onclick="processJsonData()">Запустить обработку JSON</button>
+</div>
+<div class="task1">
+    <h3>Задание 3</h3>
+    <h4>Конвертер валют (ЦБ РФ)</h4>
+    <label for="rubAmount">Введите цену в рублях:</label>
+    <input type="text" id="rubAmount" placeholder="Например: 100">
+    <button class="btn1" id="convertBtn">Сколько это в долларах?</button>
+    <div id="resultDisplay" class="result-box"></div>
+</div>
+<div class="task2">
+    <h3 class="wh">Задание 4</h3>
+    <h4 class="wh">Имитация AsyncTask</h4>
+    <div class="counter-display">
+        Загрузка: <span id="counterValue">0</span>%
+    </div>
+    <div>
+        <button class="btn1" id="startBtn" onclick="startLoading()">Запустить загрузку</button>
+        <button class="btn1" id="pauseBtn" onclick="pauseLoading()">Пауза</button>
+        <button class="btn1" id="stopBtn" onclick="stopLoading()">Остановить загрузку</button>
+    </div>
+</div>
+<div class="task1" id="timerWrapper">
+    <h3>Задание 5</h3>
+    <h4 id="mainLabel">Ссылка появится через:</h4>
+    <div id="countdownLabel" class="timer-text">10 сек.</div>
+</div>
+<div class="task2">
+    <h3 class="wh">Задание 6</h3>
+    <h4 class="wh">Управление вибрацией телефона</h4>
+    <button class="v_btn1" onclick="startVibration1()">Вибрирование 1</button>
+    <button class="v_btn2" onclick="startVibration2()">Вибрирование 2</button>
+    <button class="stop_btn" onclick="stopVibration()">Остановить вибрирование</button>
+</div>
+<script src="main.js"></script>

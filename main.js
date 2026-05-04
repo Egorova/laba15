@@ -23,33 +23,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultDisplay = document.getElementById('resultDisplay');
 
     convertBtn.addEventListener('click', async () => {
-        const rubValue = inputField.value.trim();
+        const rubValue = inputField.value.trim().replace(',', '.'); // Заменяем запятую на точку
         const rub = parseFloat(rubValue);
 
         if (isNaN(rub) || rub <= 0) {
-            const errorMsg = "Ошибка: введите корректное число больше нуля";
-            alert(errorMsg);
+            const errorMsg = "Введите число больше нуля";
             resultDisplay.innerText = errorMsg;
             resultDisplay.style.color = "red";
             return;
         }
 
         try {
+            // Показываем статус загрузки
+            resultDisplay.innerText = "Загружаем курс...";
+            resultDisplay.style.color = "gray";
+
             const response = await fetch('https://www.cbr-xml-daily.ru/daily_json.js');
             if (!response.ok) throw new Error("Ошибка сети");
+            
             const data = await response.json();
-            const usdRate = data.Valute.USD.Value;
-            const totalUsd = (rub / usdRate).toFixed(2);
-            const successMsg = `Результат: $${totalUsd} (курс: ${usdRate.toFixed(2)} руб)`;
-            alert(successMsg);
-            resultDisplay.innerText = successMsg;
-            resultDisplay.style.color = "green";
+            
+            // Проверяем, есть ли в данных USD
+            if (data && data.Valute && data.Valute.USD) {
+                const usdRate = data.Valute.USD.Value;
+                const totalUsd = (rub / usdRate).toFixed(2);
+                
+                const successMsg = `Результат: $${totalUsd} (курс ЦБ: ${usdRate.toFixed(2)} руб)`;
+                resultDisplay.innerText = successMsg;
+                resultDisplay.style.color = "green";
+            } else {
+                throw new Error("Данные о валюте не найдены");
+            }
 
         } catch (error) {
-            const apiError = "Не удалось получить свежий курс валют";
-            alert(apiError);
+            const apiError = "Ошибка: не удалось получить курс валют";
             resultDisplay.innerText = apiError;
-            console.error(error);
+            resultDisplay.style.color = "red";
+            console.error("Подробности ошибки:", error);
         }
     });
 });
